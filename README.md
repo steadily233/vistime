@@ -10,7 +10,7 @@ require("plugins/vistime")
 Be aware that any existing changes to the status bar may conflict with this plugin.
 
 # Coming features 
-- [ ] Quick insert current time and date 
+- [x] Quick insert current time and date 
 - [ ] Colored status line
 - [ ] more tweaks
 
