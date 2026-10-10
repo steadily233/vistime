@@ -11,7 +11,7 @@ Be aware that any existing changes to the status bar may conflict with this plug
 
 # Coming features 
 - [x] Quick insert current time and date 
-- [ ] Colored status line
+- [x] Colored status line
 - [ ] more tweaks
 
 Inspired by dacctal

@@ -10,6 +10,40 @@ local MODES = {
 	[vis.modes.VISUAL_LINE] = " Visual Line ",
 	[vis.modes.OPERATOR_PENDING] = " Operator Pending ",
 }
+local Style_id = 51
+local Style_inverted_id = 52
+
+local Styles = {
+	[vis.modes.NORMAL] = {
+		REGULAR = 'fore:black,back:yellow',
+		INVERTED = 'fore:yellow,back:black',
+	},
+	[vis.modes.INSERT] = {
+		REGULAR = 'fore:default,back:blue',
+		INVERTED = 'fore:green,back:black',
+	},
+	[vis.modes.VISUAL] = {
+		REGULAR = 'fore:default,back:magenta',
+		INVERTED = 'fore:magenta,back:black',
+	},
+	[vis.modes.REPLACE] = {
+		REGULAR = 'fore:default,back:red',
+		INVERTED = 'fore:blue,back:black',
+	},
+	[vis.modes.VISUAL_LINE] = {
+		REGULAR = 'fore:default,back:magenta',
+		INVERTED = 'fore:magenta,back:black',
+	},
+	[vis.modes.OPERATOR_PENDING] = {
+		REGULAR = 'fore:default,back:blue',
+		INVERTED = 'fore:blue,back:black',
+	},
+	UNFOCUSED = {
+		REGULAR = 'fore:black,back:white',
+		INVERTED = 'fore:white,back:black',
+	},
+}
+
 -- status bar 
 vis.events.subscribe(vis.events.WIN_STATUS, function(win)
 	local time = os.date("%H:%M")
@@ -22,6 +56,18 @@ vis.events.subscribe(vis.events.WIN_STATUS, function(win)
 	local status_left = mode.." "..filename..modified
 	local status_right = time .." "..cursor_status .." "
 	win:status(status_left, status_right)
+	for win in vis:windows() do
+		if win == vis.win then
+			win:style_define(Style_id, Styles[vis.mode].REGULAR)
+			win:style_define(Style_inverted_id, Styles[vis.mode].INVERTED)
+	else
+		win:style_define(Style_id, Styles.UNFOCUSED.REGULAR)
+		win:style_define(Style_inverted_id, Styles.UNFOCUSED.INVERTED)
+		end
+	end
+	for i=0,win.width do
+		win:style_pos(Style_id, i, win.height - 1)
+	end
 end)
 
 -- Insert current time function
