@@ -1,3 +1,5 @@
+A plugin for the vis editor adding a clock to the status line and tweaking a few visuals
+
 # Installation
 To install vistime, clone this repository in your `~/.config/vis/plugins/` directory.
 
